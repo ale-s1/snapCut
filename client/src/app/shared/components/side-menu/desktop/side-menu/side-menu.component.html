@@ -1,0 +1,117 @@
+<aside class="flex h-full">
+  <div
+    class="relative flex flex-col items-center w-16 h-full space-y-7 bg-gray-900 border-r border-gray-700"
+  >
+    <!-- Upload a file -->
+    <div class="border-b border-gray-200 p-3">
+      <label
+        for="upload-file"
+        class="flex items-center justify-center cursor-pointer flex-col"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="white"
+          class="size-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+          />
+        </svg>
+        <input
+          type="file"
+          hidden
+          id="upload-file"
+          (change)="onSelectedFile($event)"
+        />
+      </label>
+    </div>
+
+    <!-- Config -->
+    <button
+      class="relative flex items-center justify-center w-8 text-gray-500 hover:text-gray-200 cursor-pointer transition-colors duration-200 rounded-lg hover:bg-gray-700 p-1.5"
+      (click)="togglePanel()"
+    >
+      <span class="size-6 font-bold">C</span>
+      <div
+        class="absolute bottom-0 right-0 w-0 h-0 border-l-4 border-b-4 border-l-transparent"
+      ></div>
+    </button>
+
+    <div
+      class="absolute left-full ml-2 mt-2"
+      [ngClass]="panelState() ? 'hidden' : ''"
+    >
+      <header class="bg-[#3e3f44] w-72 h-6 text-white text-center rounded-t-lg">
+        <h2 class="text-[15px]">Config</h2>
+      </header>
+      <form>
+        <fieldset [disabled]="formDisabled">
+          <div class="bg-[#28292E] p-2 flex items-center justify-between">
+            <span class="text-white text-[12px]"> Extract audio </span>
+            <input
+              type="checkbox"
+              class=""
+              (change)="onCheckboxChange($event)"
+            />
+          </div>
+        </fieldset>
+      </form>
+
+      <header class="bg-[#3e3f44] w-72 h-6 text-white text-center">
+        <h2 class="text-[15px]">Aspect Ratio</h2>
+      </header>
+
+      <div class="flex gap-4 flex-wrap bg-[#28292E] p-2">
+        <!-- Botón 9:16 TikTok -->
+        <button
+          (click)="changeVideoAspectRatio('9:16')"
+          class="flex-1 text-white hover:text-dark-bg-color flex flex-col items-center h-20 gap-2 w-32 aspect-[9/16]bg-gray-100 border rounded shadow hover:bg-gray-200 transition p-2"
+        >
+          <svg
+            viewBox="0 0 9 16"
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-full h-full"
+          >
+            <rect width="9" height="16" fill="#f87171" rx="1" />
+          </svg>
+          <span class="text-xs font-medium">9:16 TikTok</span>
+        </button>
+
+        <!-- Botón 16:9 YouTube -->
+        <button
+          (click)="changeVideoAspectRatio('16:9')"
+          class="flex-1 text-white hover:text-dark-bg-color flex flex-col h-20 items-center gap-2 w-48 aspect-video border rounded shadow hover:bg-gray-200 transition p-2"
+        >
+          <svg
+            viewBox="0 0 16 9"
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-full h-full"
+          >
+            <rect width="16" height="9" fill="#60a5fa" rx="1" />
+          </svg>
+          <span class="text-xs font-medium">16:9 YouTube</span>
+        </button>
+
+        <!-- Botón 1:1 Square -->
+        <button
+          (click)="changeVideoAspectRatio('1:1')"
+          class="flex-1 text-white hover:text-dark-bg-color flex flex-col h-20 items-center gap-2 w-48 aspect-square border rounded shadow hover:bg-gray-200 transition p-2"
+        >
+          <svg
+            viewBox="0 0 9 9"
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-full h-full"
+          >
+            <rect width="9" height="9" fill="#34d399" rx="1" />
+          </svg>
+          <span class="text-xs font-medium">1:1 Square</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</aside>
