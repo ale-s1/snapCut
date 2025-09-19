@@ -1,41 +1,11 @@
 <router-outlet />
 
-<section class="flex bg-[#273352] h-screen">
-  <app-side-menu
-    [videoEl]="videoPlayer"
-    (videoAspect)="changeVideoAspectRatio($event)"
-    (selectedVideoFile)="selectedFile($event)"
-  />
+<div class="flex bg-[#273352] h-full">
+  <app-side-menu />
   <div class="flex flex-col w-full">
-    <div class="flex-2 border-2 flex justify-center p-2" #videoContainer>
-      <video
-        src="/video.mp4"
-        controls
-        #videoPlayer
-        [ngClass]="{
-          'aspect-square': videoRatio === '1:1',
-          'aspect-[16/9]': videoRatio === '16:9',
-          'aspect-[9/16]': videoRatio === '9:16'
-        }"
-        class="bg-black"
-        [style.height]="videoHeight + 'px'"
-      ></video>
-    </div>
-    <div class="relative flex-auto border-2 border-blue-400">
-      <div
-        class="absolute -top-4 left-1/2 -translate-x-1/2 bg-white rounded-full p-1 cursor-n-resize"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="w-5 h-5"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-        >
-          <path d="M12 4v16m0 0l-4-4m4 4l4-4m-4-12l-4 4m4-4l4 4" />
-        </svg>
-      </div>
-    </div>
+    <app-video-player
+      class="flex-1 flex justify-center items-center p-2 overflow-hidden"
+    />
+    <app-time-line />
   </div>
-</section>
+</div>
