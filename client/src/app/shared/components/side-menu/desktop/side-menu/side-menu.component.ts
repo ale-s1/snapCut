@@ -1,5 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import { DEFAULT_ASPECT_RATIO } from '@app/shared/constants/const';
+import { VideoPlayerService } from '../../../../../core/services/video-player.service';
+import { VideoRatio } from '../../../../models/type';
 
 @Component({
   selector: 'app-side-menu',
@@ -10,22 +13,20 @@ import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
 export class SideMenuComponent {
   public formDisabled = false;
   readonly panelState = signal(false);
-  public videoRatio: string = '16:9';
-  @Input() videoEl!: HTMLVideoElement | null;
-  @Output() videoAspect = new EventEmitter<string>();
-  @Output() selectedVideoFile = new EventEmitter<Event>();
+  public videoRatio: string = DEFAULT_ASPECT_RATIO;
 
-  togglePanel() {
+  constructor(private videoPlayerService: VideoPlayerService) {}
+
+  public togglePanel() {
     this.panelState.update((state) => !state);
   }
 
-  onSelectedFile(event: Event) {
-    this.selectedVideoFile.emit(event);
-  }
+  public onSelectedFile(event: Event) {}
 
-  onCheckboxChange(event: any) {}
+  public onCheckboxChange(event: any) {}
 
-  changeVideoAspectRatio(aspect: string) {
-    this.videoAspect.emit(aspect);
+  public changeVideoAspectRatio(aspect: VideoRatio) {
+    this.videoPlayerService.changeRatio(aspect);
+    this.videoRatio = aspect;
   }
 }
