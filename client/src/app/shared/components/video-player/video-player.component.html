@@ -1,14 +1,14 @@
 <div class="h-full">
   <video
     [class.hidden]="!isVideoLoaded"
+    preload="metadata"
     #videoPlayer
-    controls
     [ngClass]="{
-      'aspect-square': videoRatio === '1:1',
-      'aspect-[16/9]': videoRatio === '16:9',
-      'aspect-[9/16]': videoRatio === '9:16',
-      'aspect-[4/3]': videoRatio === '4:3',
-    }"
+        'aspect-square': videoRatio === '1:1',
+        'aspect-[16/9]': videoRatio === '16:9',
+        'aspect-[9/16]': videoRatio === '9:16',
+        'aspect-[4/3]': videoRatio === '4:3',
+      }"
     class="bg-black rounded-2xl h-full"
   ></video>
   <label
