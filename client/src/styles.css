@@ -20,6 +20,11 @@
   }
 }
 
+:root {
+  --strip-border-color: white;
+  --clip-box-border-color: red;
+}
+
 /* Do not change this, otherwise, the resizer will break */
 html,
 body {
@@ -28,4 +33,8 @@ body {
 
 button {
   cursor: pointer;
+}
+
+img {
+  user-select: none;
 }
